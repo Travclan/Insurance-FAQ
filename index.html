@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)file:///C:/Users/Travclan/Downloads/travclan_pdf%20(1).html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravClan Travel Insurance</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #394f88 0%, #5a6bb3 100%);
+            min-height: 100vh;
+        }
+        
+        .pdf-container {
+            max-width: 210mm;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #394f88 0%, #5a6bb3 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="60" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="30" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-50px) translateY(-50px); }
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .price-highlight {
+            background: rgba(255,255,255,0.2);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #394f88;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #f6a314, #fbb347);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #f6a314;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #394f88;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-text {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .pricing-table {
+            background: #f8f9fa;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .pricing-header {
+            background: linear-gradient(135deg, #394f88, #5a6bb3);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+        
+        .pricing-row {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1.5fr 1.5fr 2fr;
+            gap: 20px;
+            padding: 20px;
+            border-bottom: 1px solid #dee2e6;
+            align-items: center;
+        }
+        
+        .pricing-row:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-row:nth-child(even) {
+            background: white;
+        }
+        
+        .plan-name {
+            font-weight: 600;
+            color: #394f88;
+        }
+        
+        .price {
+            font-weight: 600;
+            color: #28a745;
+            font-size: 1.1rem;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-radius: 8px;
+            border-left: 3px solid #28a745;
+        }
+        
+        .check-icon {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #394f88 0%, #5a6bb3 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+        
+        .cta-features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .cta-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+        
+        .contact-info {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .contact-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #394f88;
+            margin-bottom: 15px;
+        }
+        
+        .contact-email {
+            color: #f6a314;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f6a314;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #555;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .pdf-container {
+                margin: 10px;
+                border-radius: 0;
+            }
+            
+            .header, .content {
+                padding: 20px;
+            }
+            
+            .pricing-row {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .cta-features {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pdf-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <img src="./TravClan Travel Insurance_files/image  (3).png">
+            </div>
+            <div class="tagline">Your Safety Net for Every Journey – Now in Your Hands</div>
+            <div class="price-highlight">Starting at just ₹35/day per passenger • Coverage up to $500,000</div>
+            
+            <!-- Compulsory Countries -->
+            <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px; display: inline-block;">
+                <div style="font-weight: 600; margin-bottom: 8px; color: #f6a314;">🌍 Compulsory Insurance Countries</div>
+                <div style="font-size: 0.9rem; opacity: 0.9;">
+                    <strong>Europe</strong> (Min €30,000) • <strong>UAE</strong>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <!-- Key Stats -->
+            <div class="stats-row">
+                <div class="stat-item">
+                    <span class="stat-number">40%+</span>
+                    <div class="stat-label">Minimum Margin</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">₹35</span>
+                    <div class="stat-label">Starting Price/Day</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$500K</span>
+                    <div class="stat-label">Max Coverage</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100+</span>
+                    <div class="stat-label">Countries Covered</div>
+                </div>
+            </div>
+            
+            <!-- Why Travel Insurance Matters -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="icon">🚨</div>
+                    Why Travel Insurance Matters for Every Traveler
+                </h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-title">🔐 Emergency Medical Coverage</div>
+                        <div class="feature-text">Peace of mind everywhere. Our plans cover emergency hospitalization, outpatient treatment, diagnostics, and more — without the financial nightmare.</div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-title">✈️ Trip Cancellations Protection</div>
+                        <div class="feature-text">Flights get canceled. Bags get delayed. Hotels overbook. We cover cancellations, delays, baggage loss, and more so your traveler is never left stranded.</div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-title">🛃 Visa-Compliant Documents</div>
+                        <div class="feature-text">Most countries mandate travel insurance for visa issuance. Generate visa-compliant documents instantly with every policy in minutes.</div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-title">🌍 Global Coverage</div>
+                        <div class="feature-text">From Dubai to Europe to Vietnam. We offer plans across destinations with customizable sums insured — from ₹10 lakh to over ₹4 crore.</div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-title">👨‍👩‍👧‍👦 Perfect for All Travel Types</div>
+                        <div class="feature-text">Cover every traveler in a single form. From senior citizens to students to group tours – we've got all bases covered.</div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-title">💡 Built for Travel Agents</div>
+                        <div class="feature-text">No paperwork, no chasing insurers, no confusion. We've simplified everything so you can focus on selling and earning.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pricing Plans -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="icon">💰</div>
+                    Insurance Plans &amp; Pricing
+                </h2>
+                
+                <div class="pricing-table">
+                    <div class="pricing-header">Choose the Perfect Plan for Your Travelers</div>
+                    <div class="pricing-row">
+                        <div style="font-weight: 600;">Plan Type</div>
+                        <div style="font-weight: 600;">Ideal For</div>
+                        <div style="font-weight: 600;">Sum Insured</div>
+                        <div style="font-weight: 600;">Price/Day</div>
+                        <div style="font-weight: 600;">Add-ons</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div class="plan-name">SafeTrip+</div>
+                        <div>Budget travelers</div>
+                        <div>$15,000</div>
+                        <div class="price">₹35</div>
+                        <div>—</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div class="plan-name">GoShield</div>
+                        <div>Visa &amp; family travelers</div>
+                        <div>$50,000</div>
+                        <div class="price">₹90</div>
+                        <div>COVID, OPD, Dental</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div class="plan-name">TravelEssentia</div>
+                        <div>Europe/US travel</div>
+                        <div>$100,000</div>
+                        <div class="price">₹110</div>
+                        <div>Sports, Baggage Loss</div>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; font-style: italic; color: #666; margin-top: 10px;">
+                    Add unlimited travelers in a group/family plan
+                </p>
+            </div>
+            
+            <!-- Coverage Benefits -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="icon">🎯</div>
+                    What's Included in Your Coverage
+                </h2>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <span class="check-icon">✅</span>
+                        <span>Emergency hospitalization</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="check-icon">✅</span>
+                        <span>COVID-19 treatment (optional)</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="check-icon">✅</span>
+                        <span>Passport/baggage loss coverage</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="check-icon">✅</span>
+                        <span>Flight cancellation protection</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="check-icon">✅</span>
+                        <span>Accidental death &amp; disability</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="check-icon">✅</span>
+                        <span>24x7 local assistance hotline</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Partner Benefits -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="icon">🤝</div>
+                    Why Partner with TravClan?
+                </h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-title">⚡ Instant Pricing &amp; Quotes</div>
+                        <div class="feature-text">Get instant premium pricing for any destination, age group, or coverage need.</div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-title">💰 Earn 40%+ Commission</div>
+                        <div class="feature-text">Enjoy one of the highest margins in the market — sell more, earn more.</div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-title">📋 24-Hour Processing</div>
+                        <div class="feature-text">Get travel insurance processed within 24 hours. Perfect for planned travelers who need reliable coverage.</div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-title">🎯 Simple Ordering</div>
+                        <div class="feature-text">Use our digital platform or quick Google Form to issue — no license or IRDA training needed for now.</div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-title">🔑 API Integration</div>
+                        <div class="feature-text">Get your API key and list directly on your website. Seamless integration for automated bookings and instant quotes.</div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-title">🛠️ Dedicated Support</div>
+                        <div class="feature-text">We handle all backend coordination with insurers. You get one-point contact for support, claims, and escalations.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="icon">❓</div>
+                    Frequently Asked Questions
+                </h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px;">
+                    <div>
+                        <h3 style="color: #394f88; font-weight: 600; margin-bottom: 20px;">👩‍💼 For Travel Agents</h3>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <div style="font-weight: 600; color: #333; margin-bottom: 8px;">🟡 How much commission will I earn?</div>
+                            <div style="color: #666; line-height: 1.6;">You earn a minimum 40% margin on every sale. For bundled sales, even higher.</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <div style="font-weight: 600; color: #333; margin-bottom: 8px;">🟡 How do I issue a policy?</div>
+                            <div style="color: #666; line-height: 1.6;">Use our online form or dashboard. Enter traveler details, select plan → get PDF instantly. Done in under 2 minutes.</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <div style="font-weight: 600; color: #333; margin-bottom: 8px;">🟡 What documents do I need?</div>
+                            <div style="color: #666; line-height: 1.6;">Just traveler passport copy and DOB. For group plans, you can upload an Excel too.</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <div style="font-weight: 600; color: #333; margin-bottom: 8px;">🟡 Will the traveler get a visa-compliant certificate?</div>
+                            <div style="color: #666; line-height: 1.6;">Yes – the generated policy has visa-compliant certificates, immediately downloadable.</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <div style="font-weight: 600; color: #333; margin-bottom: 8px;">🟡 How do I get paid?</div>
+                            <div style="color: #666; line-height: 1.6;">Your margin is deducted upfront. You collect the Selling Price from your client, and pay us the Cost Price.</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <div style="font-weight: 600; color: #333; margin-bottom: 8px;">🟡 What if I need help with claims or traveler issues?</div>
+                            <div style="color: #666; line-height: 1.6;">Our team coordinates directly with the insurer. You escalate to us, and we manage the rest.</div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 style="color: #394f88; font-weight: 600; margin-bottom: 20px;">👨‍👩‍👧 For Travelers</h3>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <div style="font-weight: 600; color: #333; margin-bottom: 8px;">🔵 Why should I buy travel insurance?</div>
+                            <div style="color: #666; line-height: 1.6;">It protects you from unexpected expenses like hospitalization abroad, flight issues, baggage loss, or passport theft. Just ₹35/day can save you lakhs.</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <div style="font-weight: 600; color: #333; margin-bottom: 8px;">🔵 Is this insurance valid in my destination country?</div>
+                            <div style="color: #666; line-height: 1.6;">Yes – you'll get a destination-specific plan. We cover over 100+ countries including the USA, Schengen, UK, UAE, SEA &amp; more.</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <div style="font-weight: 600; color: #333; margin-bottom: 8px;">🔵 Do I need this for my visa?</div>
+                            <div style="color: #666; line-height: 1.6;">Yes – for countries like Schengen, Turkey, Thailand, etc., travel insurance is mandatory for visa approval.</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <div style="font-weight: 600; color: #333; margin-bottom: 8px;">🔵 When does the policy start and end?</div>
+                            <div style="color: #666; line-height: 1.6;">You choose the date range. It starts from the day of departure and ends upon your return to India.</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <div style="font-weight: 600; color: #333; margin-bottom: 8px;">🔵 How do I claim if something happens abroad?</div>
+                            <div style="color: #666; line-height: 1.6;">The insurer has a 24x7 helpline number you can call for cashless hospitalization or to file a claim. You'll also receive detailed claim steps with the policy.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Training Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="icon">📈</div>
+                    Want to Learn How to Sell More Travel Insurance?
+                </h2>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <span class="check-icon">📱</span>
+                        <span>Pitching Templates for WhatsApp and Email</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="check-icon">💬</span>
+                        <span>Common Objection Handling</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="check-icon">📊</span>
+                        <span>Client Benefit Comparison Charts</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="check-icon">💰</span>
+                        <span>Upsell Scripts to Increase Revenue</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <div class="contact-title">📩 Ready to Get Started?</div>
+                <p style="margin-bottom: 15px; color: #666;">Contact our Training &amp; Support Team for a live 15-minute orientation</p>
+                <a href="mailto:support@travclan.com" class="contact-email">support@travclan.com</a>
+                <p style="margin-top: 10px; color: #666;">or WhatsApp us for instant support</p>
+            </div>
+        </div>
+        
+        <!-- Call to Action -->
+        <div class="cta-section">
+            <div class="cta-title">🎯 Start Selling Travel Insurance Today</div>
+            <div class="cta-subtitle">Travel smarter. Sell smarter. Protect your clients and earn more per traveler.</div>
+            
+            <div class="cta-features">
+                <div class="cta-feature">
+                    <span>🔓</span>
+                    <span>Unlock 40%+ Margin</span>
+                </div>
+                <div class="cta-feature">
+                    <span>🧾</span>
+                    <span>Issue Policies in 2 Minutes</span>
+                </div>
+                <div class="cta-feature">
+                    <span>🌍</span>
+                    <span>Sell to Every Traveler</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body></html>
